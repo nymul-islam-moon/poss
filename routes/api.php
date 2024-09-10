@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\AuthController as AuthAuthController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix'=> 'auth', 'middleware' => 'api'], function () {
     Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthAuthController::class, 'login']);
     Route::post('/me', [AuthController::class,'me']);
-    Route::post('/logout', [AuthController::class,'logout']);
-    Route::post('/refresh', [AuthController::class,'refresh']);
+    Route::post('/logout', [AuthAuthController::class,'logout']);
+    Route::post('/refresh', [AuthAuthController::class,'refresh']);
     Route::post('/change-password', [AuthController::class,'change_password']);
 });

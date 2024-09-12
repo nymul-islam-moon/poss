@@ -55,4 +55,25 @@ class AuthControllerTest extends TestCase
         // Optionally, check if the token is valid
         $this->assertNotNull($response->json('token'));
     }
+
+    // Test the login endpoint with invalid credentials.
+    public function test_login_with_invalid_credentials()
+    {
+        // Define invalid login credentials
+        $invalidCredentials = [
+            'email' => 'invalid@example.com', // Non-existing email
+            'password' => 'WrongPassword'      // Incorrect password
+        ];
+
+        // Send a POST request to the login endpoint
+        $response = $this->postJson('/api/auth/login', $invalidCredentials);
+
+        // Assert the response status is 401 Unauthorized
+        $response->assertStatus(401);
+
+        // Assert the response contains an error message
+        $response->assertJson([
+            'error' => 'Invalid credentials'
+        ]);
+    }
 }

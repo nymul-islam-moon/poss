@@ -13,11 +13,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class AuthController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
-
     public function login(LoginRequest $request)
     {
         $request->validate([
@@ -97,16 +92,10 @@ class AuthController extends Controller
     }
 
     public function me() {
-        // Retrieve the authenticated user
         $user = auth()->user();
-    
-        // Check if the user is authenticated
         if (!$user) {
-            // Return a 401 Unauthorized response if not authenticated
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-    
-        // Return the user's information
         return response()->json($user);
     }
     
@@ -138,6 +127,10 @@ class AuthController extends Controller
 
         // Respond with a success message
         return response()->json(['message' => 'Password successfully updated.']);
+    }
+
+    public function test() {
+        return response()->json(['success' => 'Test Successfully Updated'], 200);
     }
 
 

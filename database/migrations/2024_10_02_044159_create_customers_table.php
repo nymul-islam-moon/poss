@@ -26,9 +26,12 @@ return new class extends Migration
             $table->string('district');
             $table->string('country');
             $table->timestamp('data_of_birth')->nullable();
-            $table->string('gender')->nullable();
+            $table->integer('gender')->nullable()->comment('1 for male, 2 for female');
             $table->string('notes')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
+
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
         });
     }
 

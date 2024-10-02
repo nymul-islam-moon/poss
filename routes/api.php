@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,5 +31,9 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
         Route::post('/refresh', 'refresh')->name('refresh');
         Route::post('/logout', 'logout')->name('logout');
         Route::post('/change_password', 'change_password')->name('change_password');
+    });
+
+    Route::controller(CustomerController::class)->group( function () {
+        Route::get('/customer', 'index')->name('admin.customer.index');
     });
 });

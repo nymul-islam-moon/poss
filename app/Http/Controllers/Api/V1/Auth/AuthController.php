@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\ChangePasswordRequest;
 use App\Http\Requests\Api\V1\LoginRequest;
 use App\Http\Requests\StoreUserRegistrationRequest;
+use App\Http\Resources\CountryResource;
+use App\Models\Country;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -131,5 +132,9 @@ class AuthController extends Controller
         return response()->json(['success' => 'Test Successfully Updated'], 200);
     }
 
+    public function country_index() {
+        $countries = Country::where('is_active', 1)->get();
 
+        return CountryResource::collection($countries);
+    }
 }

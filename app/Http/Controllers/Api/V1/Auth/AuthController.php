@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\ChangePasswordRequest;
 use App\Http\Requests\Api\V1\LoginRequest;
 use App\Http\Requests\StoreUserRegistrationRequest;
 use App\Models\User;
@@ -100,13 +101,10 @@ class AuthController extends Controller
     }
     
 
-    public function change_password(Request $request)
+    public function change_password(ChangePasswordRequest $request)
     {
         // Validate the request
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required|min:6|confirmed', // Ensure the new password is at least 6 characters and matches the confirmation
-        ]);
+        $formData = $request->validated();
 
         // Retrieve the currently authenticated user
         $user = auth()->user();
@@ -117,12 +115,12 @@ class AuthController extends Controller
         }
 
         // Check if the provided old password matches the current password
-        if (!\Hash::check($request->input('old_password'), $user->password)) {
+        if (!\Hash::check($formData['old_password'], $user->password)) {
             return response()->json(['error' => 'The provided old password is incorrect.'], 401);
         }
 
         // Update the password
-        $user->password = bcrypt($request->input('new_password'));
+        $user->password = bcrypt($formData['new_password']);
         $user->save();
 
         // Respond with a success message

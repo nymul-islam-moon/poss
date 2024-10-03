@@ -17,14 +17,6 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('address_line1');
-            $table->string('address_line2')->nullable();
-            $table->string('postal_code');
-            $table->string('city_corporation')->nullable();
-            $table->string('upazila')->nullable();
-            $table->string('zillah');
-            $table->string('district');
-            $table->string('country');
             $table->timestamp('data_of_birth')->nullable();
             $table->integer('gender')->nullable()->comment('1 for male, 2 for female');
             $table->string('notes')->nullable();

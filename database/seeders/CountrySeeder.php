@@ -31,7 +31,7 @@ class CountrySeeder extends Seeder
             ['code' => 'AT', 'name' => 'Austria'],
             ['code' => 'AZ', 'name' => 'Azerbaijan'],
             ['code' => 'BS', 'name' => 'Bahamas'],
-            ['code' => 'BD', 'name' => 'Bangladesh'],
+            ['code' => 'BD', 'name' => 'Bangladesh', 'area' => [ 'district', 'zillah', 'upozillah', 'union', 'city corporation' ]],
             ['code' => 'BB', 'name' => 'Barbados'],
             ['code' => 'BH', 'name' => 'Bahrain'],
             ['code' => 'BE', 'name' => 'Belgium'],
@@ -244,6 +244,7 @@ class CountrySeeder extends Seeder
                 'name' => $country['name'],
                 'code' => $country['code'],
                 'is_active' => true,
+                'area' => isset( $country['area'] ) ? $country['area'] : null
             ]);
         }
     }

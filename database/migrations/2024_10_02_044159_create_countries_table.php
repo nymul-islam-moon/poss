@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('code', 3)->unique()->comment('USA');
+            $table->string('code', 3)->unique();
+            $table->json('area')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

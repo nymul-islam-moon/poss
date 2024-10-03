@@ -11,5 +11,9 @@ class Country extends Model
 
     protected $table = 'countries';
 
-    protected $fillable = [ 'name', 'code', 'is_active' ];
+    protected $fillable = [ 'name', 'code', 'is_active', 'area' ];
+
+    protected $casts = [
+        'area' => 'array',
+    ];
 }

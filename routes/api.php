@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\CountryController;
 use App\Http\Controllers\Api\V1\CustomerController;
+use App\Http\Controllers\Api\V1\HRM\EmployeeController;
 use App\Http\Middleware\CheckApiAuthenticated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,5 +42,10 @@ Route::group(['prefix' => 'auth', 'middleware' => [ 'auth:api' ]], function () {
 
     Route::controller(CountryController::class)->group( function () {
         Route::get('/country', 'index')->name('admin.country.index');
+    });
+
+    // HRM
+    Route::controller(EmployeeController::class)->group( function () {
+        Route::get('/employee', 'index')->name('admin.employee.index');
     });
 });

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1\HRM;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\StoreEmployeeRequest;
+use App\Http\Requests\Api\V1\UpdateEmployeeRequest;
 use App\Http\Resources\EmployeeResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,17 +32,23 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request)
     {
-        //
+        $formData = $request->validated();
+
+        $employee = User::create($formData);
+
+        return new EmployeeResource($employee);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $employee)
     {
-        //
+        // Return the employee resource
+        return new EmployeeResource($employee);
     }
 
     /**
@@ -54,9 +62,19 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateEmployeeRequest $request,User $employee)
     {
-        //
+        $formData = $request->validated();
+
+        if (isset($formData['password'])) {
+            $formData['password'] = bcrypt($formData['password']);
+        } else {
+            unset($formData['password']);
+        }
+
+        $employee->update($formData);
+
+        return new EmployeeResource($employee);
     }
 
     /**

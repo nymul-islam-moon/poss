@@ -7,7 +7,7 @@ use App\Http\Requests\Api\V1\StoreEmployeeRequest;
 use App\Http\Requests\Api\V1\UpdateEmployeeRequest;
 use App\Http\Resources\EmployeeResource;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class EmployeeController extends Controller
 {
@@ -80,8 +80,18 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $employee)
     {
-        //
+        // Store the employee data before deletion
+        $deletedEmployee = $employee->replicate(); // Create a copy of the employee data
+
+        // Attempt to delete the employee
+        $employee->delete();
+
+        // Return the deleted employee data
+        return response()->json([
+            'message' => 'Employee deleted successfully.',
+            'data' => new EmployeeResource($deletedEmployee), // Using EmployeeResource for formatting
+        ], Response::HTTP_OK);
     }
 }

@@ -82,16 +82,13 @@ class EmployeeController extends Controller
      */
     public function destroy(User $employee)
     {
-        // Store the employee data before deletion
-        $deletedEmployee = $employee->replicate(); // Create a copy of the employee data
+        $deletedEmployee = $employee->replicate();
 
-        // Attempt to delete the employee
         $employee->delete();
 
-        // Return the deleted employee data
         return response()->json([
             'message' => 'Employee deleted successfully.',
-            'data' => new EmployeeResource($deletedEmployee), // Using EmployeeResource for formatting
+            'data' => new EmployeeResource($deletedEmployee),
         ], Response::HTTP_OK);
     }
 }

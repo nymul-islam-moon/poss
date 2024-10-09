@@ -46,7 +46,7 @@ Route::group(['prefix' => 'auth', 'middleware' => [ 'auth:api' ]], function () {
 
     // HRM
     Route::controller(EmployeeController::class)->prefix('employee')->group(function () {
-        Route::get('/', 'index')->name('admin.employee.index');
+        Route::get('/{search?}', 'index')->name('admin.employee.index');
         Route::post('/store', 'store')->name('admin.employee.store');
         Route::get('/show/{employee}', 'show')->name('admin.employee.show');
         Route::put('/update/{employee}', 'update')->name('admin.employee.update');

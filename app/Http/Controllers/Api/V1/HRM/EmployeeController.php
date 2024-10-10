@@ -17,7 +17,6 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request->all());
         $employee = User::all();
 
         return EmployeeResource::collection($employee);

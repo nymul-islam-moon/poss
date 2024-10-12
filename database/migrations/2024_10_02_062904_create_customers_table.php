@@ -19,11 +19,13 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->timestamp('data_of_birth')->nullable();
             $table->integer('gender')->nullable()->comment('1 for male, 2 for female');
+            $table->unsignedBigInteger('country_id')->nullable();
             $table->string('notes')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
 
             $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('set null');
         });
     }
 

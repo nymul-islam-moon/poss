@@ -31,7 +31,7 @@ class CountrySeeder extends Seeder
             ['code' => 'AT', 'name' => 'Austria'],
             ['code' => 'AZ', 'name' => 'Azerbaijan'],
             ['code' => 'BS', 'name' => 'Bahamas'],
-            ['code' => 'BD', 'name' => 'Bangladesh', 'area' => [ 'district', 'zillah', 'upozillah', 'union', 'city corporation' ]],
+            ['code' => 'BD', 'name' => 'Bangladesh', 'area' => [ 'district', 'zillah', 'upozillah' ]],
             ['code' => 'BB', 'name' => 'Barbados'],
             ['code' => 'BH', 'name' => 'Bahrain'],
             ['code' => 'BE', 'name' => 'Belgium'],
@@ -237,7 +237,7 @@ class CountrySeeder extends Seeder
             ['code' => 'ZM', 'name' => 'Zambia'],
             ['code' => 'ZW', 'name' => 'Zimbabwe']
         ];
-        
+
 
         foreach ($countries as $country) {
             Country::create([

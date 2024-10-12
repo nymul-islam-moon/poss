@@ -12,7 +12,7 @@ class CustomerFactory extends Factory
 {
 
     protected $model = Customer::class;
-    
+
     /**
      * Define the model's default state.
      *
@@ -29,6 +29,7 @@ class CustomerFactory extends Factory
             'gender' => $this->faker->randomElement([1, 2]),
             'notes' => $this->faker->sentence,
             'created_by' => null,
+            'country_id' => null,
         ];
     }
 }

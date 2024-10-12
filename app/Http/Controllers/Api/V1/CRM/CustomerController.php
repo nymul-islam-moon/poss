@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1\CRM;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreCustomerRequest;
 use App\Http\Resources\CustomerResource;
-use App\Models\Customer;
 use App\Repositories\Interface\CustomerServiceInterface;
 use Illuminate\Http\Request;
 

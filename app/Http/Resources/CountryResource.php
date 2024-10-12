@@ -18,6 +18,7 @@ class CountryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'code' => $this->code,
+            'area' => ! empty( $this->area ) ? json_decode( $this->area ) : null,
             'is_active' => $this->is_active === 1 ? true : false,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

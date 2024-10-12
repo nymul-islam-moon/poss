@@ -244,7 +244,7 @@ class CountrySeeder extends Seeder
                 'name' => $country['name'],
                 'code' => $country['code'],
                 'is_active' => true,
-                'area' => isset( $country['area'] ) ? $country['area'] : null
+                'area' => isset($country['area']) ? json_encode($country['area']) : null, // Store the area array as JSON
             ]);
         }
     }

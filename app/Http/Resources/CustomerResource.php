@@ -20,12 +20,16 @@ class CustomerResource extends JsonResource
             'last_name' => $this->last_name,
             'email' => $this->email,
             'phone' => $this->phone,
-            'data_of_birth' => $this->data_of_birth,
+            'data_of_birth' => $this->data_of_birth ? $this->data_of_birth->format('Y-m-d') : null,
             'gender' => $this->gender == 1 ? 'Male' : 'Female',
             'notes' => $this->notes,
             'created_by' => $this->created_by,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
+            'country' => $this->country ? $this->country->name : null,
+            'region_data' => $this->region_data,
+            'address1' => $this->address1,
+            'address2' => $this->address2,
         ];
     }
 }

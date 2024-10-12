@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\CountryController;
-use App\Http\Controllers\Api\V1\CustomerController;
+use App\Http\Controllers\Api\V1\CRM\CustomerController;
 use App\Http\Controllers\Api\V1\HRM\EmployeeController;
 use App\Http\Middleware\CheckApiAuthenticated;
 use Illuminate\Http\Request;
@@ -40,6 +40,7 @@ Route::group(['prefix' => 'auth', 'middleware' => [ 'auth:api' ]], function () {
 
     Route::controller(CustomerController::class)->group( function () {
         Route::get('/customer', 'index')->name('admin.customer.index');
+        Route::post('/customer/store', 'store')->name('admin.customer.store');
     });
 
     Route::controller(CountryController::class)->group( function () {

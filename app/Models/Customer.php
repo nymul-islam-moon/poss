@@ -16,21 +16,28 @@ class Customer extends Model
         'last_name',
         'email',
         'phone',
-        'address_line1',
-        'address_line2',
-        'postal_code',
-        'city_corporation',
-        'upazila',
-        'zillah',
-        'district',
-        'country',
-        'data_of_birth',
+        'date_of_birth',
         'gender',
+        'country_id',
+        'region_data',
+        'address1',
+        'address2',
         'notes',
+        'created_by'
     ];
 
-    // Optional: Define casts for specific attributes
     protected $casts = [
-        'data_of_birth' => 'datetime', // Cast to a Carbon instance
+        'region_data' => 'array',
+        'date_of_birth' => 'datetime',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

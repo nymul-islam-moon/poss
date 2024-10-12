@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->timestamp('data_of_birth')->nullable();
-            $table->integer('gender')->nullable()->comment('1 for male, 2 for female');
+            $table->timestamp('date_of_birth')->nullable(); // Corrected to date_of_birth
+            $table->integer('gender')->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
+            $table->json('region_data')->nullable()->comment('Stores country-specific area hierarchy as JSON');
+            $table->string('address1')->nullable();
+            $table->string('address2')->nullable();
             $table->string('notes')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();

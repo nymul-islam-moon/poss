@@ -36,8 +36,15 @@ class CustomerController extends Controller
 
         $formData = $request->validated();
 
-        $customer = $this->customerService->store( $formData );
-
+        try {
+            $customer = $this->customerService->store($formData);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error creating customer.',
+                'errors' => [$e->getMessage()]
+            ], 400);
+        }
+    
         return response()->json([
             'message' => 'Customer created successfully!',
             'data'    => $customer,

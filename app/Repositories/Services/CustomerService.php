@@ -16,5 +16,19 @@ class CustomerService implements CustomerServiceInterface
     public function store( array $data ) {
         return Customer::create($data);
     }
+
+    public function destroy ( $id ) {
+        $customer = Customer::find($id);
+
+        if ( ! $customer ) {
+            return false;
+        }
+
+        $clonedCustomer = $customer->replicate();
+
+        $customer->delete();
+
+        return $clonedCustomer;
+    }
 }
 

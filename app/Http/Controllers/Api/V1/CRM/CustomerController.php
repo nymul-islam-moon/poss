@@ -50,4 +50,23 @@ class CustomerController extends Controller
             'data'    => $customer,
         ], 201);
     }
+
+    public function destroy( $id ) {
+
+        try {
+            $destroyedCustomer = $this->customerService->destroy( $id );
+            dd($destroyedCustomer);
+        } catch (\Exception $e) {
+            return response()->json([
+               'message' => 'Error deleting customer.',
+                'errors' => [$e->getMessage()]
+            ], 400);
+        }
+
+        return response()->json([
+           'message' => $destroyedCustomer->first_name . 'Customer deleted successfully!',
+        ], 200);
+
+    }
+
 }

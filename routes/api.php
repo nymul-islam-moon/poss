@@ -38,9 +38,10 @@ Route::group(['prefix' => 'auth', 'middleware' => [ 'auth:api' ]], function () {
         Route::post('/change_password', 'change_password')->name('change_password');
     });
 
-    Route::controller(CustomerController::class)->group( function () {
-        Route::get('/customer', 'index')->name('admin.customer.index');
-        Route::post('/customer/store', 'store')->name('admin.customer.store');
+    Route::controller(CustomerController::class)->prefix('customer')->group( function () {
+        Route::get('/', 'index')->name('admin.customer.index');
+        Route::post('/store', 'store')->name('admin.customer.store');
+        Route::delete('/destroy/{id}', 'destroy')->name('admin.customer.destroy');
     });
 
     Route::controller(CountryController::class)->group( function () {

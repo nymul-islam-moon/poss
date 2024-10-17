@@ -24,12 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/register', function() {
-    return 'hi';
-});
 Route::post('/register/store', [AuthController::class, 'register']);
 Route::post('/login/store', [AuthController::class, 'login']);
 Route::group(['prefix' => 'auth', 'middleware' => [ 'auth:api' ]], function () {
+
     Route::controller(AuthController::class)->group(function () {
         Route::post('/me', 'me')->name('me');
         Route::get('/test', 'test')->name('test');

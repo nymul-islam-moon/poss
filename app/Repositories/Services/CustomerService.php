@@ -3,7 +3,7 @@
 namespace App\Repositories\Services;
 
 use App\Models\Customer;
-use App\Repositories\Interface\CustomerServiceInterface;
+use App\Repositories\Interfaces\CustomerServiceInterface;
 
 class CustomerService implements CustomerServiceInterface
 {
@@ -15,6 +15,10 @@ class CustomerService implements CustomerServiceInterface
 
     public function store( array $data ) {
         return Customer::create($data);
+    }
+
+    public function update ( $id, array $data ) {
+
     }
 
     public function destroy ( $id ) {

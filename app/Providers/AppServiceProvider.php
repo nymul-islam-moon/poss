@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Repositories\Interface\CustomerServiceInterface;
+use App\Repositories\Interfaces\CustomerServiceInterface;
 use App\Repositories\Services\CustomerService;
 use Illuminate\Support\ServiceProvider;
 

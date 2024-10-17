@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Repositories\Interface;
+namespace App\Repositories\Interfaces;
 
-interface CustomerServiceInterface
+interface BaseServiceInterface
 {
     public function get();
 
     public function store( array $data );
+
+    public function update( int $id, array $data );
 
     public function destroy( int $id );
 }

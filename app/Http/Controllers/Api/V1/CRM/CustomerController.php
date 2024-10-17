@@ -20,7 +20,10 @@ class CustomerController extends Controller
 
     public function index(Request $request)
     {
-        $customers = $this->customerService->get();
+        $searchTerm = $request->input('search'); // Get the search term from the request
+
+        $customers = $this->customerService->get($searchTerm);
+        
         return CustomerResource::collection($customers);
     }
 

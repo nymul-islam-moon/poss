@@ -31,6 +31,14 @@ class Customer extends Model
         'date_of_birth' => 'datetime',
     ];
 
+    public function scopeSearch($query, $term)
+    {
+        return $query->where(function ($query) use ($term) {
+            $query->where('first_name', 'LIKE', "%{$term}%")
+                  ->orWhere('email', 'LIKE', "%{$term}%");
+        });
+    }
+
     public function country()
     {
         return $this->belongsTo(Country::class);

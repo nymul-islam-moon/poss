@@ -7,8 +7,13 @@ use App\Repositories\Interfaces\CustomerServiceInterface;
 
 class CustomerService implements CustomerServiceInterface
 {
-    public function get() {
-        $customers = Customer::all();
+    public function get( $searchTerm ) {
+        // $customers = Customer::all();
+
+
+        $customers = Customer::when($searchTerm, function($query) use ($searchTerm) {
+            return $query->search($searchTerm); // Call the search method
+        })->get();
 
         return $customers;
     }

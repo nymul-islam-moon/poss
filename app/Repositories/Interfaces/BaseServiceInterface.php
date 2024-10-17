@@ -4,7 +4,7 @@ namespace App\Repositories\Interfaces;
 
 interface BaseServiceInterface
 {
-    public function get();
+    public function get( string $searchTerm );
 
     public function store( array $data );
 

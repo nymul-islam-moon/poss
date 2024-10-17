@@ -37,7 +37,7 @@ Route::group(['prefix' => 'auth', 'middleware' => [ 'auth:api' ]], function () {
     });
 
     Route::controller(CustomerController::class)->prefix('customer')->group( function () {
-        Route::get('/', 'index')->name('admin.customer.index');
+        Route::get('/{search?}', 'index')->name('admin.customer.index');
         Route::post('/store', 'store')->name('admin.customer.store');
         Route::delete('/destroy/{id}', 'destroy')->name('admin.customer.destroy');
     });

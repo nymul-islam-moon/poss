@@ -8,7 +8,7 @@ use App\Repositories\Interfaces\DepartmentServiceInterface;
 class DepartmentService implements DepartmentServiceInterface
 {
     public function get( $searchTerm ) {
-        
+
         $departments = Department::when( $searchTerm, function ( $query ) use ( $searchTerm ) {
             return $query->search( $searchTerm );
         })->get();
@@ -21,8 +21,7 @@ class DepartmentService implements DepartmentServiceInterface
     }
 
     public function update( $department, array $data ) {
-        $department = Department::find( $department );
-
+        $department = Department::findOrFail( $department );
         if ( ! $department ) {
             return false;
         }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\CountryController;
 use App\Http\Controllers\Api\V1\CRM\CustomerController;
+use App\Http\Controllers\Api\V1\HRM\DepartmentController;
 use App\Http\Controllers\Api\V1\HRM\EmployeeController;
 use App\Http\Middleware\CheckApiAuthenticated;
 use Illuminate\Http\Request;
@@ -47,6 +48,14 @@ Route::group(['prefix' => 'auth', 'middleware' => [ 'auth:api' ]], function () {
     });
 
     // HRM
+    Route::controller(DepartmentController::class)->prefix('department')->group( function () {
+        Route::get('/{search?}', 'index')->name('admin.department.index');
+        Route::post('/store', 'store')->name('admin.department.store');
+        Route::get('/show/{department}', 'show')->name('admin.department.show');
+        Route::put('/update/{department}', 'update')->name('admin.department.update');
+        Route::delete('/destroy/{department}', 'destroy')->name('admin.department.destroy');
+    });
+
     Route::controller(EmployeeController::class)->prefix('employee')->group(function () {
         Route::get('/{search?}', 'index')->name('admin.employee.index');
         Route::post('/store', 'store')->name('admin.employee.store');

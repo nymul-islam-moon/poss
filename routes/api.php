@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\CountryController;
 use App\Http\Controllers\Api\V1\CRM\CustomerController;
 use App\Http\Controllers\Api\V1\HRM\DepartmentController;
 use App\Http\Controllers\Api\V1\HRM\EmployeeController;
+use App\Http\Controllers\Api\V1\HRM\JobController;
 use App\Http\Middleware\CheckApiAuthenticated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,14 @@ Route::group(['prefix' => 'auth', 'middleware' => [ 'auth:api' ]], function () {
         Route::get('/show/{department}', 'show')->name('admin.department.show');
         Route::put('/update/{department}', 'update')->name('admin.department.update');
         Route::delete('/destroy/{department}', 'destroy')->name('admin.department.destroy');
+    });
+
+    Route::controller(JobController::class)->prefix('job')->group( function () {
+        Route::get('/{search?}', 'index')->name('admin.job.index');
+        Route::post('/store', 'store')->name('admin.job.store');
+        Route::get('/show/{job}', 'show')->name('admin.job.show');
+        Route::put('/update/{job}', 'update')->name('admin.job.update');
+        Route::delete('/destroy/{job}', 'destroy')->name('admin.job.destroy');
     });
 
     Route::controller(EmployeeController::class)->prefix('employee')->group(function () {

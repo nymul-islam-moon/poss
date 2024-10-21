@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Api\V1\HRM;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\StoreDepartmentRequest;
-use App\Http\Requests\Api\V1\UpdateDepartmentRequest;
-use App\Http\Resources\DepartmentResource;
-use App\Models\Department;
-use App\Repositories\Interfaces\DepartmentServiceInterface;
+use App\Http\Requests\Api\V1\StoreJobRequest;
+use App\Http\Requests\Api\V1\UpdateJobRequest;
+use App\Http\Resources\JobsResource;
+use App\Models\Job;
+use App\Repositories\Interfaces\JobServiceInterface;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class JobController extends Controller
 {
 
-    protected $departmentService;
+    protected $jobService;
 
-    public function __construct(DepartmentServiceInterface $departmentService) 
+    public function __construct(JobServiceInterface $jobService)
     {
-        $this->departmentService = $departmentService;
+        $this->jobService = $jobService;
     }
 
     /**
@@ -27,9 +27,9 @@ class DepartmentController extends Controller
     {
         $searchTerm = $request->input('search');
 
-        $departments = $this->departmentService->get($searchTerm);
+        $jobs = $this->jobService->get($searchTerm);
 
-        return DepartmentResource::collection($departments);
+        return JobsResource::collection($jobs);
     }
 
     /**
@@ -43,12 +43,12 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDepartmentRequest $request)
+    public function store(StoreJobRequest $request)
     {
         $formData = $request->validated();
 
         try {
-            $department = $this->departmentService->store($formData);
+            $job = $this->jobService->store($formData);
         } catch ( \Exception $e ) {
             return response()->json([
                 'error' => 'Failed to create department.',
@@ -57,17 +57,17 @@ class DepartmentController extends Controller
         }
 
         return response()->json([
-            'message' => 'Department created successfully',
-            'data' => $department,
+            'message' => 'Job created successfully',
+            'data' => $job,
         ], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $department)
+    public function show(string $id)
     {
-        return new DepartmentResource($department);
+        //
     }
 
     /**
@@ -81,22 +81,22 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDepartmentRequest $request, Department $department)
+    public function update(UpdateJobRequest $request, Job $job)
     {
         $formData = $request->validated();
 
         try {
-            $updatedDepartment = $this->departmentService->update($department->id, $formData);
+            $updatedJob = $this->jobService->update($job->id, $formData);
         } catch ( \Exception $e ) {
             return response()->json([
-                'error' => 'Failed to update department.',
+                'error' => 'Failed to update job.',
                'message' => $e->getMessage(),
             ], 500);
         }
 
         return response()->json([
-           'message' => 'Department updated successfully.',
-            'data' => $updatedDepartment,
+           'message' => 'Job updated successfully.',
+            'data' => $updatedJob,
         ], 200);
     }
 
@@ -106,17 +106,17 @@ class DepartmentController extends Controller
     public function destroy( $id )
     {
         try {
-            $destroyedDepartment = $this->departmentService->destroy( $id );
+            $destroyedJob = $this->jobService->destroy( $id );
         } catch (\Exception $e) {
             return response()->json([
-                'error' => 'Failed to delete department.',
+                'error' => 'Failed to delete job.',
                'message' => $e->getMessage(),
             ], 400);
         }
 
         return response()->json([
-            'message' => 'Department deleted successfully.',
-            'data' => $destroyedDepartment,
+            'message' => 'Job deleted successfully.',
+            'data' => $destroyedJob,
         ], 200);
     }
 }
